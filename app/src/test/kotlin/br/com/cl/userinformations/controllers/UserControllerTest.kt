@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -26,7 +28,20 @@ class UserControllerTest {
             contentType = MediaType.APPLICATION_JSON
             content = readJson("__files/user_request.json")
         }.andExpect {
-            status().isOk()
+            status().isOk
+        }
+    }
+
+    @Test
+    @Sql("/insert_contract.sql")
+    fun `findById, must test`() {
+        val idUser = 1L
+        mockMvc.get("/user/${idUser}") {
+            header("client_id", "client_id")
+            header("client_seed", "client_seed")
+            header("Authorization", "bearer Authorization")
+        }.andExpect {
+            status().isOk
         }
     }
 }

@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    val userComponent: UserComponent
+    val userComponent: UserComponent,
 ) {
     fun register(dto: UserDTO): UserModel {
         return userComponent.register(dto)
+    }
+
+    fun findById(idUser: Long): UserDTO {
+        return userComponent.findById(idUser)
     }
 }

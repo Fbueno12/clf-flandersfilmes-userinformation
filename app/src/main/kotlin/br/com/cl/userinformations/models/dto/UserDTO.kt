@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
 
 data class UserDTO (
-    val name: String,
-    @JsonProperty("user_name") val userName: String,
-    val email: String,
-    val password: String
+    var name: String? = null,
+    @JsonProperty("user_name")
+    var userName: String? = null,
+    var email: String? = null,
+    var password: String? = null
 ): Serializable
