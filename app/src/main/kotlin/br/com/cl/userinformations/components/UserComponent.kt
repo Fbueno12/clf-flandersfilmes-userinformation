@@ -5,7 +5,6 @@ import br.com.cl.userinformations.factory.UserModelFactory
 import br.com.cl.userinformations.models.UserModel
 import br.com.cl.userinformations.models.dto.UserDTO
 import br.com.cl.userinformations.repository.UserRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 
 @Component
@@ -21,7 +20,7 @@ class UserComponent(
     }
 
     fun findById(idUser: Long): UserDTO {
-        val user = userRepository.findByIdOrNull(idUser) ?: throw Exception("User not found")
+        val user = userRepository.findById(idUser).orElseThrow { Exception("userNotFoundException") }
         return userDTOFactory.generateFromModel(user)
     }
 
