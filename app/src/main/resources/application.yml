@@ -9,3 +9,7 @@ spring:
   h2:
     console:
       enabled: true
+# TODO: must find a place to store app credentials
+application:
+  client-id: 679c099c-ebd2-4efc-aa78-d2fc0790c441
+  client-seed: b4e2f27f-149a-44b1-a89c-9ae4cd88f77f
