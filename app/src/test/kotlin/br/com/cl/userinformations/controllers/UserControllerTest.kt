@@ -4,7 +4,10 @@ import br.com.cl.userinformations.models.UserModel
 import br.com.cl.userinformations.repository.UserRepository
 import br.com.cl.userinformations.utils.readJson
 import org.hamcrest.Matchers
+import org.junit.jupiter.api.MethodOrderer
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,6 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class UserControllerTest {
 
     @Autowired
@@ -26,6 +30,7 @@ class UserControllerTest {
     lateinit var userRepository: UserRepository
 
     @Test
+    @Order(1)
     fun `register, must test`() {
         mockMvc.post("/user") {
             header("client_id", "client_id")
@@ -45,6 +50,7 @@ class UserControllerTest {
     }
 
     @Test
+    @Order(2)
     fun `findById, must test`() {
         val idUser = 1L
         val userMock = this.insertNewUser(idUser)
